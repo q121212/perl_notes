@@ -76,3 +76,24 @@ my @giant = 1..1e5;
 my @the_more_big = (@giant, undef, @giant);
 my @arr = ('','','','');
 say $#arr;
+
+my @fred = qw(eating rocks is wrong);
+my $fred = "right";
+print "this is $fred[3]\n";
+
+print "this is ${fred}[3]\n";
+print "this is $fred"."[3]\n";
+print "this is $fred\[3]\n";
+
+my @rocks = qw/bedrock slate lava/;
+foreach my $rock(@rocks) {
+	$rock = "\t$rock";
+	$rock .= "\n";
+}
+print "The rocks are:\n", @rocks;
+
+my @fred = 6..10;
+print @fred;
+my $q=reverse(@fred);
+@fred = reverse(@fred);
+print @fred;
