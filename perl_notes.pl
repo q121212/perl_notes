@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 use warnings;
-# use feature qw(signatures);
-# no warnings qw(experimental::signatures);
+use feature qw(signatures);
+no warnings qw(experimental::signatures);
 # use diagnostics;
 use strict;
 
@@ -199,12 +199,13 @@ sub average(@){
 	foreach (@_){
 		$summa += $_;
 	}
-	$summa/@_#
+	print scalar @_;
+	$summa/scalar @_;
 }
 
 sub above_average(@){
 	my @list = (); 
-	state $num_of_average = &average(@_);
+	my $num_of_average = &average(@_);
 	print "\nAverage for: ", @_, " is: ", $num_of_average, "\n";
 	foreach (@_){
 		if ($_ > $num_of_average) {
@@ -216,3 +217,39 @@ sub above_average(@){
 }
 
 above_average(1,2,3,4);
+
+my @fred = above_average(1..10);
+print "\@fred is @fred\n";
+print "(Should be 6 7 8 9 10)\n";
+my @barney = above_average(100, 1..10);
+print "\@barney is @barney\n";
+print "(Should be just 100)\n";
+
+
+sub greet ($){
+	state @names;
+	my $name = @_[0];
+	push(@names, $name);
+	if (scalar @names < 2){print "\nHi ".$name."! You are the first on here!"}
+	if ($names[-2]){print "\nHi ".$name."! ".$names[-2]." is also here!"}
+}
+
+greet( "Fred" );
+greet( "Barney" );
+greet( "Max" );
+greet( "John" );
+
+print("\n");
+sub greet_from_all ($){
+	state @names;
+	my $name = @_[0];
+	push(@names, $name);
+	if (scalar @names < 2){print "\nHi ".$name."! You are the first on here!"}
+	if ($names[-2]){print "\nHi ".$name."! I've seen:". join (" ", @names)}
+	print "\n";
+}
+
+greet_from_all("Fred" );
+greet_from_all("Barney" );
+greet_from_all("Wilma" );
+greet_from_all("Betty" );
