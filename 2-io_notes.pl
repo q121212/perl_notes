@@ -29,7 +29,9 @@ foreach (<STDIN>){
 }
 
 
-# if You use like an argument in command line hyphen (-), then input would be coming from standart input!
+# If hypрen (-) used as an argument in command line, then input would be coming from standart input!
+# for example: $ this_script.pl file1 - file2
+# this means  this_script.pl will processed first file1, then - standart input (until it's completion via ^D in linux, ^Z bin Windows), then - file2.
 print "<> for arguments selection in command line";
 while (defined(my $line = <>)){
 	chomp($line);
@@ -46,3 +48,41 @@ while (<>){
 print "<<>> is Double diamond (v.5.22 or later). It's prevent runs external programs from the script (for example, if command line args have pipe lines '|')\n";
 
 print @ARGV;
+my @ar = qw/fred barney betty/;
+
+print "\nVariable \$\" have the next content (it's between two \' sings): \'".$"."\'\n";
+print @ar;
+print "\n@ar";
+$" = "\n";
+print "\n\nNow I changed it and variable \$\" have the next content (it's between two \' sings): \'".$"."\'\n";
+
+print "\n@ar";
+
+print "\n".'Standart Unix tools have been implemented in Perl in http://www.perlpowertools.com/'. "\nFor example, cat:\n";
+
+print <>; # implementation of /bin/cat
+print "Also sort:\n";
+print sort <>; # implementation of /bin/sort
+
+print (2+3)*234;
+
+printf "%6d\n", 42; # output like ````42 (the ` symbol stands for a space)
+printf "%2d\n", 2e3 + 1.95; # 2001
+printf "%*s", 10, "wilma"; # looks like `````wilma
+#You can use two * to get the total width and the number of decimal places to format a float:
+printf "%*.*f", 6, 2, 3.1415926; # looks like ```3.14
+printf "%*.*f", 6, 3, 3.1415926; # looks like ``3.142
+
+my @items = qw( wilma dino pebbles );
+my $format = "\nThe items are:\n" . ("%10s\n" x @items);
+## print "the format is >>$format<<\n"; # for debugging
+printf $format, @items;
+
+# or the sane in one-line mode:
+printf "\nThe items are:\n".("%10s\n" x @items), @items;
+
+open CONFIG, '<:encoding(UTF-8)', '2-io_notes.pl';
+foreach my $index (<CONFIG>){
+    if $index <5:
+	    printf $<CONFIG>[$index];
+}
