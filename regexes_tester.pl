@@ -22,6 +22,7 @@ sub regex_matches ($){
 
 sub regex_tester{
 	my $pattern;
+	# Function read from ARGV argument as $pattern if it was passed or requires it to enter (in reversed order, of course)
 	if (!@ARGV){
 		print "Input pattern, please, and press ^D:\n";
 		while (<STDIN>) {
@@ -40,7 +41,7 @@ sub regex_tester{
 sub logging($$$){
 	my ($log_regex_pattern, $log_regex_expression, $result) = @_; 
 	# my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-	open F, '>>', 'regex_tester.log' || die "Can't open file: $!";
+	open F, '>>', 'log_for_regex_tester.log' || die "Can't open file: $!";
 	print F "log_regex_pattern:\t". $log_regex_pattern. "\n";
 	print F "log_regex_expression:\t". $log_regex_expression. "\n";
 	print F "Result:\t". $result;
