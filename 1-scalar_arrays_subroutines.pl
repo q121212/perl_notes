@@ -137,7 +137,7 @@ my @list = qw\fred betty barney dino wilma pebbles bamm-bamm\;
 print "Write a few lines and press ^D (if you use Windows then press ^Z) for stop writing and continue my script!\n";
 chomp(my @lines = <STDIN>);
 print "\nheeey!\n";
-say "You writed the next text:\n", reverse @lines;
+say "You writted the next text:\n", reverse @lines;
 
 foreach my $index (0..$#lines){
 	print $list[scalar $lines[$index]]."\n";

@@ -78,11 +78,13 @@ my $format = "\nThe items are:\n" . ("%10s\n" x @items);
 ## print "the format is >>$format<<\n"; # for debugging
 printf $format, @items;
 
-# or the sane in one-line mode:
+# or the same in one-line mode:
 printf "\nThe items are:\n".("%10s\n" x @items), @items;
 
-open CONFIG, '<:encoding(UTF-8)', '2-io_notes.pl';
-foreach my $index (<CONFIG>){
-    if $index <5:
-	    printf $<CONFIG>[$index];
-}
+# sub tac (@) {
+# 	foreach my $i (0..ARGV[-1]) {
+# 		printf $i;
+# 	}
+# }
+
+# tac qw/a1 b2 c3 d4 e5 f6 g7/;
