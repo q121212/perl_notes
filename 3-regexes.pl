@@ -1,57 +1,39 @@
 #!/usr/bin/perl
 
+# Aonother way to use Perl: $ perl -e 'perlcode...'
+
 use strict;
 use warnings;
 
 
 $_= "yabba dabba doo";
-if (/ba/) {
-	print "It matched!\n-----------\n"
+$_ = "acca11bb";
+# \g{1} and \g{-1} - it's a capture groups with back references and reletive back references respectively
+my $pattern = '(.)(.)\g{2}\g{-2}11';
+if (/$pattern/) {
+	print "In string \'$_\' pattern \'$pattern\' WAS MATCHED!\n";
+}
+else{
+	print "In string \'$_\' pattern \'$pattern\' WASN'T MATCHED!\n"
 }
 
-sub regex_matches ($){
-	my $pattern = $_[0];
-	my $result;
-	print "Input string for regex_tester:\n";
-	while (<STDIN>) {
-	chomp;
-	if (/$pattern/){
-		$result = "\tMatches\n";
-		}
-	else {
-		$result = "\tDoesn't match\n"
-		}
-	print($result);
-	logging($pattern, $_, $result);
+$_= 'http://yandex.ru/a.png';
+if ( /\Ahttps?:/ ) {
+print "Found a URL\n";
+}
+
+if ( /\.png\z/ ) {
+print "Found a .png\n";
+}
+
+my $what = 'larry';
+print "Print something or somethink starts with 'larry' word or print 'exit' to Exit from the while cycle:\n";
+while (<>){
+	if (/^($what)/){ #also we can use (/^$what/) and it's the same, but for more complex values of $what round brackets may be necessary  
+		print "We saw $what in beginning of $_";
+	}
+	if (/exit/i){
+		exit 3;
 	}
 }
 
-sub regex_tester{
-	my $pattern;
-	if (!@ARGV){
-		print "Input pattern, please, and press ^D:\n";
-		while (<STDIN>) {
-			chomp;
-			$pattern = $_;
-		}
-		regex_matches($pattern);
-		}
-	else{
-		$pattern = join ' ', @ARGV;
-		regex_matches($pattern);
-	}
-}
-
-
-sub logging($$$){
-	my ($log_regex_pattern, $log_regex_expression, $result) = @_; 
-	# my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-	open F, '>>', 'regex_tester.log' || die "Can't open file: $!";
-	print F "log_regex_pattern:\t". $log_regex_pattern. "\n";
-	print F "log_regex_expression:\t". $log_regex_expression. "\n";
-	print F "Result:\t". $result;
-	print F "-------- ".`date +"%c"`."\n";
-	close(F);
-}
-
-regex_tester;

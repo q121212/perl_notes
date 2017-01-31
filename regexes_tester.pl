@@ -45,6 +45,7 @@ sub logging($$$){
 	print F "log_regex_pattern:\t". $log_regex_pattern. "\n";
 	print F "log_regex_expression:\t". $log_regex_expression. "\n";
 	print F "Result:\t". $result;
+	# date +"%c" would work only on linux-based PC
 	print F "-------- ".`date +"%c"`."\n";
 	close(F);
 }
