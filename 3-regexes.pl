@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Aonother way to use Perl: $ perl -e 'perlcode...'
+# Another way to use Perl: $ perl -e 'perlcode...'
 
 use strict;
 use warnings;
@@ -10,9 +10,7 @@ $_= "yabba dabba doo";
 $_ = "acca11bb";
 # \g{1} and \g{-1} - it's a capture groups with back references and reletive back references respectively
 my $pattern = '(.)(.)\g{2}\g{-2}11';
-if (/$pattern/) {
-	print "In string \'$_\' pattern \'$pattern\' WAS MATCHED!\n";
-}
+if (/$pattern/)
 else{
 	print "In string \'$_\' pattern \'$pattern\' WASN'T MATCHED!\n"
 }
