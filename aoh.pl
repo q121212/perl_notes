@@ -27,3 +27,14 @@ my @sorted_array_of_hashes = sort { $a->{name} cmp $b->{name} } @array_of_hashes
 use Data::Dumper;
 print Dumper(\@sorted_array_of_hashes);
 
+# # Very simple AoA implementation:
+# my @AoA;
+# for my $x (1 .. 10) {
+#         for my $y (1 .. 10) {
+#             for my $z (1 .. 10) {
+#                 $AoA[$x][$y][$z] =
+#                     $x ** $y + $z;
+#                 # print "$AoA[$x][$y][$z]\n";
+#             }
+#         }
+#     }
