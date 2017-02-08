@@ -26,6 +26,13 @@ if ( /\.png\z/ ) {
 print "Found a .png\n";
 }
 
+# Automatic match vars: $& , $` , and $'
+my $string = "Hey everyone! What's happenings in the world?";
+if ($string =~ /!\s\w+/){
+	print "\nFor string \'$string\':\n \$\&: ($&), \$\`: ($`), \$\': ($')\n\n";
+}
+
+
 my $what = 'larry';
 print "Print something or something starts with 'larry' word or print 'exit' to Exit from the while cycle:\n";
 while (<>){
@@ -37,7 +44,7 @@ while (<>){
 	}
 }
 
-# simple finding a TAGs and text in between ones (It works only for case one dimensional (linear) nesting)
+# simple finding a TAGs and text in between ones (It works only for case one dimensional (linear) nesting of tags, for example: <html><body><table><tr><td></td></tr></table></body></html> and without tag's parameters, of course)
 my $html_code = '<html><head><title>Title of the page</title></head><body><p>Some text</body></html>';
 sub linear_html_parser ($){
 	my $text = $_[0];
