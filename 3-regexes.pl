@@ -39,18 +39,18 @@ while (<>){
 
 # simple finding a TAGs and text in between ones (It works only for case one dimensional (linear) nesting)
 my $html_code = '<html><head><title>Title of the page</title></head><body><p>Some text</body></html>';
-sub html_parser ($){
+sub linear_html_parser ($){
 	my $text = $_[0];
-	print "\nString for parsing: ", $text;
 	my $sub_text;
 	if ($text =~ /(<(.+?)>)(.*)(<\/\g{2}>)/i){
+		print "\n\n--------\nString for parsing: ", $text;
 		print("\n\nOpen tag:\t\t\t", $1, "\ntext in between the tags:\t", $3, "\nClosed tag:\t\t\t", $4);
 		$sub_text = $3; 
 		}
 	
 	return $sub_text;
 }
-my $subtext = &html_parser($html_code);
+my $subtext = &linear_html_parser($html_code);
 while ($subtext){
-$subtext = &html_parser($subtext);
+$subtext = &linear_html_parser($subtext);
 }
