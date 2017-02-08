@@ -8,9 +8,11 @@ use warnings;
 
 $_= "yabba dabba doo";
 $_ = "acca11bb";
-# \g{1} and \g{-1} - it's a capture groups with back references and reletive back references respectively
+# \g{1} and \g{-1} - it's a capture groups with back references and relative back references respectively
 my $pattern = '(.)(.)\g{2}\g{-2}11';
-if (/$pattern/)
+if (/$pattern/) {
+	print "In string \'$_\' pattern \'$pattern\' WAS MATCHED!\n";
+}
 else{
 	print "In string \'$_\' pattern \'$pattern\' WASN'T MATCHED!\n"
 }
@@ -25,7 +27,7 @@ print "Found a .png\n";
 }
 
 my $what = 'larry';
-print "Print something or somethink starts with 'larry' word or print 'exit' to Exit from the while cycle:\n";
+print "Print something or something starts with 'larry' word or print 'exit' to Exit from the while cycle:\n";
 while (<>){
 	if (/^($what)/){ #also we can use (/^$what/) and it's the same, but for more complex values of $what round brackets may be necessary  
 		print "We saw $what in beginning of $_";
@@ -35,3 +37,20 @@ while (<>){
 	}
 }
 
+# simple finding a TAGs and text in between ones (It works only for case one dimensional (linear) nesting)
+my $html_code = '<html><head><title>Title of the page</title></head><body><p>Some text</body></html>';
+sub html_parser ($){
+	my $text = $_[0];
+	print "\nString for parsing: ", $text;
+	my $sub_text;
+	if ($text =~ /(<(.+?)>)(.*)(<\/\g{2}>)/i){
+		print("\n\nOpen tag:\t\t\t", $1, "\ntext in between the tags:\t", $3, "\nClosed tag:\t\t\t", $4);
+		$sub_text = $3; 
+		}
+	
+	return $sub_text;
+}
+my $subtext = &html_parser($html_code);
+while ($subtext){
+$subtext = &html_parser($subtext);
+}
